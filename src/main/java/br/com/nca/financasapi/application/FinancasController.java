@@ -1,13 +1,11 @@
 package br.com.nca.financasapi.application;
 
-import br.com.nca.financasapi.domain.dtos.AnaliseRequestDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +24,7 @@ public class FinancasController {
     }
 
     @PostMapping("/analise")
-    public ResponseEntity<?> processarAnalise(@RequestBody AnaliseRequestDTO dto){
+    public ResponseEntity<?> processarAnalise(){
 
         var mensagem = """
                 Solicitação de análise financeira.
