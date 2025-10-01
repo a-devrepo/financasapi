@@ -32,8 +32,9 @@ public class MovimentacaoServiceImpl implements MovimentacaoService {
         movimentacao.setNome(request.nome());
         movimentacao.setData(LocalDate.parse(request.data()));
         movimentacao.setValor(BigDecimal.valueOf(request.valor()));
-        movimentacao.setTipo(new Tipo());
-        movimentacao.getTipo().setId(request.tipoId());
+
+        var tipo = tipoRepository.findById(request.tipoId()).get();
+        movimentacao.setTipo(tipo);
 
         movimentacaoRepository.save(movimentacao);
 
