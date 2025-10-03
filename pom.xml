@@ -33,6 +33,7 @@
         <swagger.version>2.8.13</swagger.version>
         <scalar.version>0.3.9</scalar.version>
         <scalar-openapi.version>2.8.13</scalar-openapi.version>
+        <openai-api.version>4.1.0</openai-api.version>
     </properties>
     <dependencies>
         <dependency>
@@ -96,6 +97,11 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-scalar</artifactId>
             <version>${scalar-openapi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.openai</groupId>
+            <artifactId>openai-java</artifactId>
+            <version>${openai-api.version}</version>
         </dependency>
     </dependencies>
 
