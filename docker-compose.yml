@@ -1,5 +1,4 @@
 services:
-
   rabbitmq:
     image: 'rabbitmq:3-management'
     container_name: financasapi-rabbitmq
@@ -17,7 +16,7 @@ services:
     container_name: financasapi-postgres
     restart: always
     ports:
-      - '5438:5432'
+      - '5434:5432'
     environment:
       POSTGRES_DB: financasapidb
       POSTGRES_USER: usuariosuser
@@ -26,8 +25,33 @@ services:
       - 'financasapidb-data:/var/lib/postgresql/data'
     networks:
         - financasapi_net
+
+  mongodb:
+    image: mongo:6
+    container_name: financasapi-mongodb
+    ports:
+    - "27018:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: financasuser
+      MONGO_INITDB_ROOT_PASSWORD: financaspass
+      MONGO_INITDB_DATABASE: financasdb
+    volumes:
+    - mongo_data:/data/db
+    networks:
+    - financasapi_net
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: financasapi-mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - financasapi_net
+
 volumes:
   financasapidb-data:
+  mongo_data:
 networks:
   financasapi_net:
     driver: bridge
