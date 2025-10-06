@@ -3,7 +3,6 @@ package br.com.nca.financasapi.infrastructure.components;
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
 import com.openai.models.ChatModel;
-import com.openai.models.responses.Response;
 import com.openai.models.responses.ResponseCreateParams;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -25,7 +24,17 @@ public class OpenAIComponent {
                 .model(ChatModel.GPT_4_1)
                 .build();
 
-        Response response = client.responses().create(params);
-        return response.output().toString();
+        var messages = client.responses()
+                .create(params)
+                .output()
+                .stream()
+                .flatMap(item -> item.message().stream())
+                .toList();
+
+        return messages.get(0)
+                .content()
+                .getFirst()
+                .outputText()
+                .get().text();
     }
 }
