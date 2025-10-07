@@ -29,7 +29,7 @@ public class SwaggerConfiguration {
                                 .url("https://springdoc.org")))
                 .servers(List.of(
                         new Server()
-                                .url("http://localhost:8082")
+                                .url("http://localhost:8084")
                                 .description("Servidor de Desenvolvimento"),
                         new Server()
                                 .url("https://api.autenticacao.com")
